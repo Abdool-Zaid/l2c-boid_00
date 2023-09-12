@@ -1,17 +1,19 @@
 function love.load()
-    love.window.setTitle("brick breaker")
-    Score= 0
+    love.window.setTitle("boid test 00")
     love.window.setMode(1024, 768)
-    Projectile = require("projectile")
+    Objects = require("objects")
    UserIO= require('user_input_logic')
    UserIO.init()
+    Boids =  Objects.init_boids(14)
 end
 function love.update(dt)
-    Projectile.CoorX = love.mouse.getPosition()
+    Objects.target.CoorX,Objects.target.CoorY = love.mouse.getPosition()
     
 end
 
 function love.draw()
-    Projectile.draw_projectile()
+    Objects.draw_user()
+    Objects.draw_boids(Boids)
+
  end
  
