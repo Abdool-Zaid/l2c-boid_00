@@ -19,7 +19,7 @@ local res = {}
         local boids= {}
         for i = 1, population_size, 1 do
            local ind = res.boid
-            ind.colour= Rand.color_RGB()
+          
             ind.CoorX = math.random(love.graphics.getWidth())
             ind.CoorY = math.random(love.graphics.getHeight())
             table.insert(boids,ind)
@@ -34,11 +34,10 @@ local res = {}
         end
 
         function res.draw_boids(boids)
-            love.graphics.print(type(boids[1].colour))
 
             for i = 1, #boids, 1 do
-                -- love.graphics.setColor(boids[i].colour[1],boids[i].colour[2],boids[i].colour[3])
-                -- love.graphics.circle("fill",boids[i].CoorX,boids[i].CoorY,boids[i].radius)
+                love.graphics.setColor(boids[i].colour[1],boids[i].colour[2],boids[i].colour[3])
+                love.graphics.circle("fill",boids[i].CoorX,boids[i].CoorY,boids[i].radius)
             
             end
         end

@@ -21,4 +21,9 @@ function res.add_variance(input,tolerance)
     variance= variance * tolerance
     return input / variance
 end    
+function res.number()
+    
+    
+end
+
 return res
