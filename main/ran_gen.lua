@@ -21,9 +21,25 @@ function res.add_variance(input,tolerance)
     variance= variance * tolerance
     return input / variance
 end    
-function res.number()
-    
+function res.number(Seed)
+    return lcg(Seed)
     
 end
 
+function lcg(Seed)
+
+ A = 1664525
+ C = 1013904223
+ M = 2^32
+
+    Seed = (A* Seed + C) % M
+    return Seed / M
+
+end
+
+
+ function xor_shift()
+    
+ end
+ 
 return res
