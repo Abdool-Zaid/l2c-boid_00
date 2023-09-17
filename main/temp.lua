@@ -1,5 +1,5 @@
 local ran = require("ran_gen")
-for i = 1, 10, 1 do
+for i = 1, 100, 1 do
 Seed = os.time()
 
     RES = ran.number(Seed)
