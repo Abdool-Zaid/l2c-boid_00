@@ -9,9 +9,11 @@ end
 function love.update(dt)
     Objects.target.CoorX,Objects.target.CoorY = love.mouse.getPosition()
     
+    
 end
 
 function love.draw()
+    
     Objects.draw_user()
     Objects.draw_boids(Boids)
 

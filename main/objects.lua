@@ -10,19 +10,21 @@ local res = {}
 
     res.boid={
                 radius = 3;
-                colour = {0.2,0.2,0.2};
+                colour = {0.1,0.7,0.2 };
                 CoorX = -1;
                 CoorY = -1;
              }
 
     function res.init_boids(population_size)
         local boids= {}
-        for i = 1, population_size, 1 do
+        local width_x= love.graphics.getWidth()
+        local height_y = love.graphics.getHeight()
+        local pop = population_size
+        for i = 1, pop, 1 do
            local ind = res.boid
-          
-            ind.CoorX = math.random(love.graphics.getWidth())
-            ind.CoorY = math.random(love.graphics.getHeight())
-            table.insert(boids,ind)
+            ind.coorX =  love.math.random(width_x)
+            ind.CoorY = love.math.random(height_y) 
+            table.insert(boids, ind)
         end
         
         return boids
@@ -34,12 +36,12 @@ local res = {}
         end
 
         function res.draw_boids(boids)
-
-            for i = 1, #boids, 1 do
-                love.graphics.setColor(boids[i].colour[1],boids[i].colour[2],boids[i].colour[3])
-                love.graphics.circle("fill",boids[i].CoorX,boids[i].CoorY,boids[i].radius)
             
+            for _, value in ipairs(boids) do
+                love.graphics.setColor(value.colour[1], value.colour[2], value.colour[3])
+                love.graphics.circle("fill", value.CoorX, value.CoorY , value.radius)                
             end
+
         end
 
 
