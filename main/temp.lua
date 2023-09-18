@@ -1,9 +1,6 @@
-local ran = require("ran_gen")
-for i = 1, 10, 1 do
-Seed = os.time()
+local obj = require("objects")
+local pop = obj.init_boids(14)
 
-    RES = ran.number(Seed)
-    print( RES)
-    
-end
-
+    for _, value in pairs(pop) do
+        print(value.CoorX)
+    end

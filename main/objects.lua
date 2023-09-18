@@ -1,4 +1,4 @@
- local Rand = require("ran_gen")
+local boid_logic = require("boid")
 local res = {}
 
     res.target = {
@@ -8,12 +8,26 @@ local res = {}
                     CoorY = -1;
                  }
 
-    res.boid={
-                radius = 3;
-                colour = {0.1,0.7,0.2 };
-                CoorX = -1;
-                CoorY = -1;
-             }
+    local  boid={}
+
+    function boid.new(x,y)
+            local object = {
+                    radius = 3;
+                    colour = {0.1,0.7,0.2 };
+                
+                }
+                 object.CoorX =x
+                 object.CoorY = y
+                setmetatable(object,self)       
+
+                return object
+
+             end
+
+            function boid:check_algo(x,y,flock)
+                boid_logic.check(x,y,flock)
+            end
+
 
     function res.init_boids(population_size)
         local boids= {}
@@ -21,9 +35,8 @@ local res = {}
         local height_y = love.graphics.getHeight()
         local pop = population_size
         for i = 1, pop, 1 do
-           local ind = res.boid
-            ind.coorX =  love.math.random(width_x)
-            ind.CoorY = love.math.random(height_y) 
+            local x, y = math.random(width_x) ,math.random(height_y)
+           local ind = boid.new(x,y)
             table.insert(boids, ind)
         end
         
@@ -37,7 +50,7 @@ local res = {}
 
         function res.draw_boids(boids)
             
-            for _, value in ipairs(boids) do
+            for _, value in pairs(boids) do
                 love.graphics.setColor(value.colour[1], value.colour[2], value.colour[3])
                 love.graphics.circle("fill", value.CoorX, value.CoorY , value.radius)                
             end
