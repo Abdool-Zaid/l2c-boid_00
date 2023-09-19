@@ -35,7 +35,7 @@ local res = {}
         local height_y = love.graphics.getHeight()
         local pop = population_size
         for i = 1, pop, 1 do
-            local x, y = math.random(width_x) ,math.random(height_y)
+            local x, y = love.math.random(width_x) ,love.math.random(height_y)
            local ind = boid.new(x,y)
             table.insert(boids, ind)
         end

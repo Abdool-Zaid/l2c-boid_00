@@ -5,10 +5,11 @@ function love.load()
    UserIO= require('user_input_logic')
    UserIO.init()
     Boids =  Objects.init_boids(14)
+    flock_logic = require("boid")
 end
 function love.update(dt)
     Objects.target.CoorX,Objects.target.CoorY = love.mouse.getPosition()
-    
+    flock_logic.check(Objects.target.CoorX, Objects.target.CoorY, Boids)
     
 end
 
