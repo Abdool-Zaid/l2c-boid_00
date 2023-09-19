@@ -9,7 +9,7 @@ function love.load()
 end
 function love.update(dt)
     Objects.target.CoorX,Objects.target.CoorY = love.mouse.getPosition()
-    Flock_logic.check(Objects.target.CoorX, Objects.target.CoorY, Boids)
+    Flock_logic.check( Boids)
 end
 
 function love.draw()
