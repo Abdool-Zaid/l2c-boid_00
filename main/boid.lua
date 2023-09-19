@@ -2,8 +2,10 @@ local res = {}
 local map={}
     res.speed = 4
 function res.check(destinationX,destinationY,flock)
-    init(destinationX,destinationY,flock)
-    test_1()
+    local pop= flock
+    init(destinationX,destinationY,pop)
+    test_1(pop)
+   
     
 end
 
@@ -17,22 +19,29 @@ function init(x,y,pop)
     end
     
 end
-function test_1()
+function test_1(flock)
     -- travel to center of mass
+   local pop = flock
     local mass = {}
         mass.x= map[1][1]
         mass.y= map[1][2]
-    for i = 2, #map, 1 do
-        local dirX = mass.x - map[i].x
-        local dirY = mass.y - map[i].y
-        dirX = dirX<0 and -1 or 1
-        dirY = dirY<0 and -1 or 1
-        local vec = {(dirX* res.speed),(dirY*res.speed)}
-        flock[i].CoorX= flock[i].CoorX + vec[1]
-        flock[i].CoorY= flock[i].CoorY + vec[2]
-    end
-    
+
+        for _, value in pairs(pop) do
+            local dirX = mass.x - value.CoorX
+            local dirY = mass.y - value.CoorY
+                dirX = dirX <0 and -1 or 1
+                dirY = dirY <0 and -1 or 1
+
+            local vec = {(dirX * res.speed), (dirY * res.speed)}
+
+            value.CoorX= value.CoorX + vec[1]
+            value.CoorY= value.CoorY + vec[2]
+
+
+        end
+
 end
+
 function test_2()
     -- match vectors
     

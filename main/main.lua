@@ -2,15 +2,14 @@ function love.load()
     love.window.setTitle("boid test 00")
     love.window.setMode(1024, 768)
     Objects = require("objects")
-   UserIO= require('user_input_logic')
-   UserIO.init()
+    UserIO= require('user_input_logic')
+    UserIO.init()
     Boids =  Objects.init_boids(14)
-    flock_logic = require("boid")
+    Flock_logic = require("boid")
 end
 function love.update(dt)
     Objects.target.CoorX,Objects.target.CoorY = love.mouse.getPosition()
-    flock_logic.check(Objects.target.CoorX, Objects.target.CoorY, Boids)
-    
+    Flock_logic.check(Objects.target.CoorX, Objects.target.CoorY, Boids)
 end
 
 function love.draw()
