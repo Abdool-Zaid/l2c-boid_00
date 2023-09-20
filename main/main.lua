@@ -4,7 +4,7 @@ function love.load()
     Objects = require("objects")
     UserIO= require('user_input_logic')
     UserIO.init()
-    Boids =  Objects.init_boids(14)
+    Boids =  Objects.init_boids(147 )
     Flock_logic = require("boid")
 end
 function love.update(dt)
