@@ -12,7 +12,7 @@ local res = {}
 
     function boid.new(x,y)
             local object = {
-                    radius = 3;
+                    radius = 30;
                     colour = {0.1,0.7,0.2 };
                 
                 }
@@ -23,7 +23,7 @@ local res = {}
                   object.ball.body = love.physics.newBody(World, object.CoorX, object.CoorY, "dynamic")
                   object.ball.shape = love.physics.newCircleShape( object.radius)
                   object.ball.fixture = love.physics.newFixture(  object.ball.body,   object.ball.shape, 1)
-                  object.ball.fixture:setRestitution(0.9) 
+                  object.ball.fixture:setRestitution(1.1) 
                 
                 
                 return object
@@ -52,19 +52,27 @@ local res = {}
         return boids
     end
     
-        function res.draw_user()
+     local   function draw_user()
             love.graphics.setColor(res.target.colour[1],res.target.colour[2],res.target.colour[3])
             love.graphics.circle("fill", res.target.CoorX, res.target.CoorY, res.target.shape:getRadius())
         end
 
-        function res.draw_boids(boids)
+      local  function draw_boids(boids)
             
             for _, value in pairs(boids) do
                 love.graphics.setColor(value.colour[1],value.colour[2],value.colour[3])
-                love.graphics.circle("fill", value.ball.body:getX(), value.ball.body:getY(), value.ball.shape:getRadius())
+                love.graphics.circle("line", value.ball.body:getX(), value.ball.body:getY(), value.ball.shape:getRadius())
             end
 
         end
+   local     function draw_world_border()
+            
+        end
 
+        function res.render(Boids)
+            draw_world_border()
+            draw_user()
+            draw_boids(Boids)
+        end
 
 return res

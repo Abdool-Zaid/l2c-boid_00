@@ -1,11 +1,10 @@
 World = love.physics.newWorld(0,0,true)
 function love.load()
-    love.window.setTitle("boid test 00")
-    love.window.setMode(1024, 768)
+    love.window.setTitle("boid test 01")
     Objects = require("objects")
     UserIO= require('user_input_logic')
     UserIO.init()
-    Boids =  Objects.init_boids(147 )
+    Boids =  Objects.init_boids(10 )
     Flock_logic = require("boid")
 end
 
@@ -18,8 +17,6 @@ end
 
 function love.draw()
     
-    Objects.draw_user()
-    Objects.draw_boids(Boids)
-
+    Objects.render(Boids)
  end
  
