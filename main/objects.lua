@@ -18,10 +18,16 @@ local res = {}
                 }
                  object.CoorX =x
                  object.CoorY = y
-                setmetatable(object,self)       
 
+                object.ball = {}
+                  object.ball.body = love.physics.newBody(World, object.CoorX, object.CoorY, "dynamic")
+                  object.ball.shape = love.physics.newCircleShape( object.radius)
+                  object.ball.fixture = love.physics.newFixture(  object.ball.body,   object.ball.shape, 1)
+                  object.ball.fixture:setRestitution(0.9) 
+                
+                
                 return object
-
+                
              end
 
             function boid:check_algo(x,y,flock)
@@ -40,19 +46,22 @@ local res = {}
             table.insert(boids, ind)
         end
         
+        res.target.body=love.physics.newBody(World,res.target.CoorX,res.target.CoorX,"dynamic")
+        res.target.shape=love.physics.newCircleShape(res.target.radius)
+        res.target.fixture= love.physics.newFixture(res.target.body,res.target.shape,res.target.radius)
         return boids
     end
     
         function res.draw_user()
             love.graphics.setColor(res.target.colour[1],res.target.colour[2],res.target.colour[3])
-            love.graphics.circle("fill", res.target.CoorX, res.target.CoorY, res.target.radius)
+            love.graphics.circle("fill", res.target.CoorX, res.target.CoorY, res.target.shape:getRadius())
         end
 
         function res.draw_boids(boids)
             
             for _, value in pairs(boids) do
-                love.graphics.setColor(value.colour[1], value.colour[2], value.colour[3])
-                love.graphics.circle("fill", value.CoorX, value.CoorY , value.radius)                
+                love.graphics.setColor(value.colour[1],value.colour[2],value.colour[3])
+                love.graphics.circle("fill", value.ball.body:getX(), value.ball.body:getY(), value.ball.shape:getRadius())
             end
 
         end
