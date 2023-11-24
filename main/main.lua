@@ -12,7 +12,8 @@ end
 
 function love.update(dt)
     Objects.target.CoorX,Objects.target.CoorY = love.mouse.getPosition()
-    -- Flock_logic.check( Boids)
+    Flock_logic.check( Boids)
+    World:update(dt)
 end
 
 function love.draw()

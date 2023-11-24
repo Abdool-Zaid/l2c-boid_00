@@ -1,60 +1,32 @@
 local res = {}
-local map={}
-local target_mass
 res.speed = 4
+local target={}
+target.x, target.y = love.mouse.getPosition()
 
 function res.check(flock)
    
-    init(flock)
     test_1(flock)
     
 end
 
-function init(pop)
-    target_mass ={tar().x,tar().y}
-    table.insert(map,target_mass)
-    for key, value in pairs(pop) do
-        local x = value.CoorX
-        local y = value.CoorY
-        table.insert(map,{key,x,y})
-    end
-    
-end
 
 function test_1(flock)
-    -- travel to center of mass
-        for _, value in pairs(flock) do
-            local dirX = tar().x - value.CoorX
-            local dirY = tar().y - value.CoorY
-            dirX = dirX <0 and -1 or 1
-            dirY = dirY <0 and -1 or 1
-            
-            local vec = {(dirX * vector()), (dirY * vector())}
-            
-            value.CoorX= value.CoorX + vec[1]
-            value.CoorY= value.CoorY + vec[2]
-
+    local fl = flock
+        
+        for _, boid in ipairs(fl) do
+            local fx, fy = get_distance(target.x,target.y,boid.ball.body:getX(),boid.ball.body:getY())
+            boid.ball.body:applyForce(fx,fy)
             
         end
-        
-    end
-    
-    function vector()
-        -- match vectors
-        local vec = res.speed
-        
-        return vec
-        
-    end
+        print("moved")
 
-    function tar()
-       local x,y = love.mouse.getPosition()
-       local res={}
-           res.x=x
-           res.y=y
-       return res
-    end
-    
-
+end
+function get_distance(x1,y1,x2,y2)
+    local dx =0
+    local dy =0
+    dx = (x1-x2)/100
+    dy = (y1-y2)/100
+    return dx ,dy
+end
 
 return res
